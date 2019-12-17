@@ -3,7 +3,9 @@
 library(tidyverse)
 library(eph)
 library(readxl)
+library(rlist)
 
+### 
 secuencia_par<-seq(2,48,2)
 secuencia_impar<-seq(1,48,2)
 paginas <- NA
@@ -46,6 +48,7 @@ for (i in unique(secuencia_impar)) {
 base_lista_final <- base_lista_final %>% 
   discard(is.null)
 
+### Agrego tipo de agrupamiento de las escalas
 names(base_lista_final)[1:8] <- "Universitario"
 names(base_lista_final)[9:16] <- "Terciario"
 names(base_lista_final)[17:24] <- "Operativa"
@@ -57,5 +60,25 @@ for (i in unique(agrupamiento)) {
   base_lista_final[i] <- base_lista_final[i]
 }
 
-base_lista_final[1] <- base_lista_final[1] %>% 
-  mutate(mes = "enero")
+### Agrego mes al que corresponde la escala
+# Meses del año
+#meses <- format(ISOdate(2019,1:12,1),"%B") %>% 
+meses <- factor(x = c("Enero", "Febrero", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre"),
+                levels = c("Enero", "Febrero", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre"))
+
+for (i_mes in meses) {
+  for (i_lista in 1:24) {
+    base_lista_final[[i_lista]] <- base_lista_final[[i_lista]] %>% 
+      mutate(mes = i_mes)
+  }
+}
+library(rlist)
+list.filter(.data = base_lista_final, Name == "Universitario")
+
+prueba <- base_lista_final[[1]]
+base_lista_final <- base_lista_final %>% 
+  filter(Name == "Universitario")
+
+lapply(base_lista_final, function(x) {
+  x$Name
+})
