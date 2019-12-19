@@ -72,13 +72,13 @@ for (i_mes in meses) {
       mutate(mes = i_mes)
   }
 }
-library(rlist)
-list.filter(.data = base_lista_final, Name == "Universitario")
 
-prueba <- base_lista_final[[1]]
-base_lista_final <- base_lista_final %>% 
-  filter(Name == "Universitario")
+lista_agrupamiento <- list(universitario = c(1:8),
+                           terciario = c(9:16),
+                           operativa = c(17:24))
 
-lapply(base_lista_final, function(x) {
-  x$Name
-})
+
+for (bases in names(base_lista_final)) {
+  base_lista_final[[bases]] <- mutate(base_lista_final[[bases]],
+                                      mes = meses)
+}
