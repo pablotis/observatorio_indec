@@ -17,13 +17,13 @@ base_trab <- base_orig %>%
   pivot_longer(-periodo, names_to = "indicador", values_to = "indice")
 
 # Punto final para etiqueta
-etiqueta <- c(glue("Inflación \n ({round(last(base_orig$inflacion_nov15),1)}%)"), 
-              glue("Salaraio promedio \n sector privado \n ({round(last(base_orig$y_privado_evol[!is.na(base_orig$y_privado_evol)]),1)}%)"), 
-              glue("Sector público \n SINEP \n ({round(last(base_orig$y_d0_evol),1)}%)"))
+etiqueta <- c(glue("Inflación \n ({round(last(base_orig$inflacion_nov15),1)})"), 
+              glue("Salaraio promedio \n sector privado \n ({round(last(base_orig$y_privado_evol[!is.na(base_orig$y_privado_evol)]),1)})"), 
+              glue("Sector público \n SINEP \n ({round(last(base_orig$y_d0_evol),1)})"))
 
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_perdida(base = base_trab, mes = 9)
+graf_evol_perdida(base = base_trab, mes = 10)
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_salario(base = base_trab, mes = 9)
+graf_evol_salario(base = base_trab, mes = 10)
