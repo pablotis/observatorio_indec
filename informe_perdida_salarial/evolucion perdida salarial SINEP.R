@@ -9,10 +9,15 @@ p_load(tidyverse, lubridate, cowplot, openxlsx, directlabels, glue)
 source("Funciones/func_grafico_evol_salario_perdida.R", encoding = "UTF-8")
 
 # Cargo base de datos
-base_orig <- read.xlsx("Entrada/base_informe_perdida.xlsx", detectDates = TRUE)
+base_orig <- read.xlsx("Entrada/base_informe_perdida.xlsx", sheet = 1, detectDates = TRUE)
+
+# Defino temporalidad -No se usa, por ahora-
+# mes <- 11
+# anio <- 2020
 
 # objeto para gráfico
 base_trab <- base_orig %>% 
+  #filter(periodo <= glue("{anio}-{mes}-01")) %>% 
   select(-c(y_d0_nominal, y_privado_nominal)) %>% 
   pivot_longer(-periodo, names_to = "indicador", values_to = "indice")
 
@@ -23,7 +28,7 @@ etiqueta <- c(glue("Inflación \n ({round(last(base_orig$inflacion_nov15),1)})")
 
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_perdida(base = base_trab, mes = 10)
+graf_evol_perdida(base = base_trab, mes = 11)
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_salario(base = base_trab, mes = 10)
+graf_evol_salario(base = base_trab, mes = 11)
