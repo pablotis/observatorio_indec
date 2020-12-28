@@ -23,7 +23,7 @@ base_trab <- base_orig %>%
 
 # Punto final para etiqueta
 etiqueta <- c(glue("Inflación \n ({round(last(base_orig$inflacion_nov15),1)})"), 
-              glue("Salaraio promedio \n sector privado \n ({round(last(base_orig$y_privado_evol[!is.na(base_orig$y_privado_evol)]),1)})"), 
+              glue("Sector privado \n ({round(last(base_orig$y_privado_evol[!is.na(base_orig$y_privado_evol)]),1)})"), 
               glue("Sector público \n SINEP \n ({round(last(base_orig$y_d0_evol),1)})"))
 
 
