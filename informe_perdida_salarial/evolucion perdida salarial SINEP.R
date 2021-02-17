@@ -5,11 +5,16 @@
 library(pacman)
 p_load(tidyverse, lubridate, cowplot, openxlsx, directlabels, glue)
 
+
+
 # Cargo funciones para armar gráficos
 source("Funciones/func_grafico_evol_salario_perdida.R", encoding = "UTF-8")
 
+# Defino mes de trabajo
+mes <- 01
+
 # Cargo base de datos
-base_orig <- read.xlsx("Entrada/base_informe_perdida.xlsx", sheet = 1, detectDates = TRUE)
+base_orig <- read.xlsx("Entrada/base_informe_perdida.xlsx", sheet = "D0", detectDates = TRUE)
 
 # Defino temporalidad -No se usa, por ahora-
 # mes <- 11
@@ -28,7 +33,7 @@ etiqueta <- c(glue("Inflación \n ({round(last(base_orig$inflacion_nov15),1)})")
 
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_perdida(base = base_trab, mes = 11)
+graf_evol_perdida(base = base_trab, mes = mes)
 
 # Definir la base de trabajo y el mes de comparación en nro
-graf_evol_salario(base = base_trab, mes = 11)
+graf_evol_salario(base = base_trab, mes = mes)
