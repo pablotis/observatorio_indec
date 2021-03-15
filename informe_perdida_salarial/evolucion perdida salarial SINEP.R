@@ -11,7 +11,7 @@ p_load(tidyverse, lubridate, cowplot, openxlsx, directlabels, glue)
 source("Funciones/func_grafico_evol_salario_perdida.R", encoding = "UTF-8")
 
 # Defino mes de trabajo
-mes <- 01
+mes <- 02
 
 # Cargo base de datos
 base_orig <- read.xlsx("Entrada/base_informe_perdida.xlsx", sheet = "D0", detectDates = TRUE)
